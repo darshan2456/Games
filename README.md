@@ -1,0 +1,1 @@
+This is a basic implementation of tic tac toe I wrote from scratch in C in my leisure time, you can clone and directly run the executable to play the game in terminal. 

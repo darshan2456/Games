@@ -49,18 +49,25 @@ int main(){
     {
         int exit;
         printf("\n\n\nWelcome to tic tac toe game created by Darshan Mukul Parekh\n");
-        printf("These are the marking positions:-\n");
+        printf("These are the positions corresponding to the given numbers:-\n");
         printf("-----------\n");
         printf("- 1  2  3 -\n");
         printf("- 4  5  6 -\n");
         printf("- 7  8  9 -\n");
         printf("-----------\n");
-        printf("First one to play is Player no, 1 and has 'X'\n");
         printf("Rules are the same as normal. Enjoy the game!!!\n\n(To exit enter '-1', to continue enter any number)\n\n");
         printf("Enter here:- ");
         scanf("%d",&exit);
 
         if(exit==-1)    break;
+
+        char player1[100];
+        char player2[100];
+
+        printf("enter name of first player:- ");
+        scanf("%s",&player1);
+        printf("enter name of second player:- ");
+        scanf("%s",player2);
 
         char board[3][3];
         int player=0;
@@ -77,14 +84,13 @@ int main(){
 
             if(i%2==0){
                 xo='X';
-                player=1;
+                printf("%s's turn:- ",player1);
             }
             else{
                 xo='0';
-                player=2;
+                printf("%s's turn:- ",player2);
             }
 
-            printf("Player no %d's turn:- ",player);
             scanf("%d",&choice);
 
             switch(choice){
