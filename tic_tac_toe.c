@@ -3,12 +3,12 @@
 #include<stdbool.h>
 
 void display_board(char arr[3][3]){
-    printf("---------\n");
+    printf("---------------\n");
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            printf("|%c|",arr[i][j]);
+            printf("| %c |",arr[i][j]);
         }
-        printf("\n---------\n");
+        printf("\n--------------\n");
     }
 }
 
@@ -28,15 +28,15 @@ int who_won(char arr[3][3]){
 
 
     //row wise checking for player 2
-    if(arr[0][0]=='0' && arr[0][1]=='0' && arr[0][2]=='0' || arr[1][0]=='0' && arr[1][1]=='0' && arr[1][2]=='0' || arr[2][0]=='0' && arr[2][1]=='0' && arr[2][2]=='0'){
+    if(arr[0][0]=='O' && arr[0][1]=='O' && arr[0][2]=='O' || arr[1][0]=='O' && arr[1][1]=='O' && arr[1][2]=='O' || arr[2][0]=='O' && arr[2][1]=='O' && arr[2][2]=='O'){
         return 2;
     }
     //col wise checking for player 1
-    else if(arr[0][0]=='0' && arr[1][0]=='0' && arr[2][0]=='0' || arr[0][1]=='0' && arr[1][1]=='0' && arr[2][1]=='0' || arr[0][2]=='0' && arr[1][2]=='0' && arr[2][2]=='0'){
+    else if(arr[0][0]=='O' && arr[1][0]=='O' && arr[2][0]=='O' || arr[0][1]=='O' && arr[1][1]=='O' && arr[2][1]=='O' || arr[0][2]=='O' && arr[1][2]=='O' && arr[2][2]=='O'){
         return 2;
     }
     //diagonal checking for player 1
-    else if(arr[0][0]=='0' && arr[1][1]=='0' && arr[2][2]=='0' || arr[0][2]=='0' && arr[1][1]=='0' && arr[2][0]=='0'){
+    else if(arr[0][0]=='O' && arr[1][1]=='O' && arr[2][2]=='O' || arr[0][2]=='O' && arr[1][1]=='O' && arr[2][0]=='O'){
         return 2;
     }
     
@@ -61,20 +61,35 @@ int main(){
 
         if(exit==-1)    break;
 
+
+        //taking name of the players
         char player1[100];
         char player2[100];
 
+        retry_name:
         printf("enter name of first player:- ");
-        scanf("%s",&player1);
+        scanf("%s",player1);
         printf("enter name of second player:- ");
         scanf("%s",player2);
 
+        if(strncmp(player1,player2,100)==0){
+            printf("both player names cant be same. Try again\n\n");
+            goto retry_name;
+        }
+
+
+        //setting up the matrix
         char board[3][3];
         int player=0;
         int winner=0;
         bool gameover=false;
 
-        memset(board,' ',sizeof(board));
+
+        //setting default value of the board
+        board[0][0]='1';board[0][1]='2';board[0][2]='3';
+        board[1][0]='4';board[1][1]='5';board[1][2]='6';
+        board[2][0]='7';board[2][1]='8';board[2][2]='9';
+
 
         for(int i=0;i<9;i++){
             if(gameover==true)    break;
@@ -87,15 +102,20 @@ int main(){
                 printf("%s's turn:- ",player1);
             }
             else{
-                xo='0';
+                xo='O';
                 printf("%s's turn:- ",player2);
             }
 
             scanf("%d",&choice);
 
+            if(choice<1 || choice>9){
+                printf("Number must be between 1 and 9. Try againn\n");
+                goto retry;
+            }
+
             switch(choice){
                 case 1:
-                    if(board[0][0]!=' '){
+                    if(board[0][0]!='1'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -105,18 +125,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 2:
-                    if(board[0][1]!=' '){
+                    if(board[0][1]!='2'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -127,18 +147,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 3:
-                    if(board[0][2]!=' '){
+                    if(board[0][2]!='3'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -148,18 +168,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 4:
-                    if(board[1][0]!=' '){
+                    if(board[1][0]!='4'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -169,18 +189,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 5:
-                    if(board[1][1]!=' '){
+                    if(board[1][1]!='5'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -190,18 +210,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 6:
-                    if(board[1][2]!=' '){
+                    if(board[1][2]!='6'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -211,18 +231,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 7:
-                    if(board[2][0]!=' '){
+                    if(board[2][0]!='7'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -232,18 +252,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 8:
-                    if(board[2][1]!=' '){
+                    if(board[2][1]!='8'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -253,18 +273,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
                     break;
 
                 case 9:
-                    if(board[2][2]!=' '){
+                    if(board[2][2]!='9'){
                         printf("position already filled. try again\n");
                         goto retry;
                     }
@@ -274,18 +294,18 @@ int main(){
 
                     winner=who_won(board);
                     if(winner==1){
-                        printf("Player 1 won!!!");
+                        printf("\n%s won!!!",player1);
                         gameover=true;
                     }
                     else if(winner==2){
-                        printf("Player 2 won!!!");
+                        printf("\n%s won!!!",player2);
                         gameover=true;
                     }
 
             }
         }
 
-        if(!gameover)   printf("Game draw\n");
+        if(!gameover)   printf("\nGame draw\n");
 
         printf("\n\n========================================");
 
