@@ -2,7 +2,7 @@
 #include<string.h>
 #include<stdbool.h>
 
-void display_board(char arr[3][3]){
+void display_board_ttt(char arr[3][3]){
     printf("---------------\n");
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
@@ -43,12 +43,12 @@ int who_won(char arr[3][3]){
     return 0;
 }
 
-int main(){
+void tic_tac_toe(){
 
     while (1)
     {
         int exit;
-        printf("\n\n\nWelcome to tic tac toe game created by Darshan Mukul Parekh\n");
+        printf("\n\n\nWelcome to tic tac toe\n");
         printf("These are the positions corresponding to the given numbers:-\n");
         printf("-----------\n");
         printf("- 1  2  3 -\n");
@@ -86,6 +86,7 @@ int main(){
 
 
         //setting default value of the board
+        
         board[0][0]='1';board[0][1]='2';board[0][2]='3';
         board[1][0]='4';board[1][1]='5';board[1][2]='6';
         board[2][0]='7';board[2][1]='8';board[2][2]='9';
@@ -121,7 +122,7 @@ int main(){
                     }
 
                     board[0][0]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -143,7 +144,7 @@ int main(){
 
 
                     board[0][1]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -164,7 +165,7 @@ int main(){
                     }
 
                     board[0][2]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -185,7 +186,7 @@ int main(){
                     }
 
                     board[1][0]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -206,7 +207,7 @@ int main(){
                     }
 
                     board[1][1]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -227,7 +228,7 @@ int main(){
                     }
 
                     board[1][2]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -248,7 +249,7 @@ int main(){
                     }
 
                     board[2][0]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -269,7 +270,7 @@ int main(){
                     }
 
                     board[2][1]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -290,7 +291,7 @@ int main(){
                     }
 
                     board[2][2]=xo;
-                    display_board(board);
+                    display_board_ttt(board);
 
                     winner=who_won(board);
                     if(winner==1){
@@ -310,4 +311,4 @@ int main(){
         printf("\n\n========================================");
 
     }
-}   
+}  

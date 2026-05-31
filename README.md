@@ -1,1 +1,1 @@
-This is a basic implementation of tic tac toe I wrote from scratch in C in my leisure time, you can clone and directly run the executable to play the game in terminal. 
+This is a collection of games I have played and am going to implement it in C from scratch, right now only tic_tac_toe works, others are in progress. Clone and directly run the executable `main` to run the game. Thank you. More games coming soon.
