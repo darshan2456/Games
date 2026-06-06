@@ -80,7 +80,6 @@ void tic_tac_toe(){
 
         //setting up the matrix
         char board[3][3];
-        int player=0;
         int winner=0;
         bool gameover=false;
 
@@ -93,6 +92,7 @@ void tic_tac_toe(){
 
 
         for(int i=0;i<9;i++){
+
             if(gameover==true)    break;
             retry:
             int choice;
@@ -114,196 +114,27 @@ void tic_tac_toe(){
                 goto retry;
             }
 
-            switch(choice){
-                case 1:
-                    if(board[0][0]!='1'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
+            int row=(choice-1)/3;
+            int col=(choice-1)%3;
 
-                    board[0][0]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 2:
-                    if(board[0][1]!='2'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-
-                    board[0][1]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 3:
-                    if(board[0][2]!='3'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[0][2]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 4:
-                    if(board[1][0]!='4'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[1][0]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 5:
-                    if(board[1][1]!='5'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[1][1]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 6:
-                    if(board[1][2]!='6'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[1][2]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 7:
-                    if(board[2][0]!='7'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[2][0]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 8:
-                    if(board[2][1]!='8'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[2][1]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
-                    break;
-
-                case 9:
-                    if(board[2][2]!='9'){
-                        printf("position already filled. try again\n");
-                        goto retry;
-                    }
-
-                    board[2][2]=xo;
-                    display_board_ttt(board);
-
-                    winner=who_won(board);
-                    if(winner==1){
-                        printf("\n%s won!!!",player1);
-                        gameover=true;
-                    }
-                    else if(winner==2){
-                        printf("\n%s won!!!",player2);
-                        gameover=true;
-                    }
-
+            if(board[row][col]=='X' || board[row][col]=='O'){
+                printf("Position already filled. Try again");
+                goto retry;
             }
+
+            board[row][col]=xo;
+            display_board_ttt(board);
+
+            int winner=who_won(board);
+            if(winner==1){
+                printf("\n%s won!!!",player1);
+                gameover=true;
+            }
+            else if(winner==2){
+                printf("\n%s won!!!",player2);
+                gameover=true;
+            }
+
         }
 
         if(!gameover)   printf("\nGame draw\n");

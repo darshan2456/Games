@@ -31,38 +31,43 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
         obj=SUN;
     }
 
-    //below three if conditions check if there are three consecutive suns or moons (row-wise or column-wise)
+
+    //below cases check if there are three consecutive suns or moons (row-wise or column-wise)
+
+    // //corner case
+    // if(row==col)
 
     //first condition - upper two      ||      second condition - lower two
-    if(board[row-1][col]==obj && board[row-2][col]==obj || board[row+1][col]==obj && board[row+2][col]==obj){
+    if((row>=2 && row<=3) && board[row-1][col]==obj && board[row-2][col]==obj || board[row+1][col]==obj && board[row+2][col]==obj){
         return false;
     }
-    //first condiiton - right two      ||      second condition - left two
-    else if(board[row][col+1]==obj && board[row][col+2]==obj || board[row][col-1]==obj && board[row][col-2]==obj){
+    //second condiiton - right two      ||      second condition - left two
+    else if((col>=2 && col<=3) && board[row][col+1]==obj && board[row][col+2]==obj || board[row][col-1]==obj && board[row][col-2]==obj){
         return false;
     }
-    //middle of two - vertical      ||        middle of two - horizontal
-    else if(board[row-1][col]==obj && board[row+1][col]==obj || board[row][col-1]==obj && board[row][col+1]==obj){
+    //middle of two case:-                                               middle of two - vertical      ||        middle of two - horizontal
+    else if((row>=1 && row<=4 && col>=1 && col<=4) && board[row-1][col]==obj && board[row+1][col]==obj || board[row][col-1]==obj && board[row][col+1]==obj){
         return false;
     }
 
-    //below we check if there are total 3 or less suns and moons in any row/col
 
-    int c_moon=0;int c_sun=0;int r_moon=0;int r_sun=0;
 
-    for(int i=0;i<6;i++){           //checking if the row contains more than 3 suns or moon
-        if(board[row][i]==MOON)     r_moon++;
-        if(board[row][i]==SUN)      r_sun++;
-    }
 
-    for(int i=0;i<6;i++){           //checking if the colummn contains more than 3 suns or moon
-        if(board[i][col]==MOON)     c_moon++;
-        if(board[i][col]==SUN)      c_sun++;
-    }
-    
-    if(r_moon>=3 || r_sun>=3 || c_moon>=3 || c_sun>=3){
-        return false;
-    }
+    //below we check if there are total 3 or less suns or moons (objs) in given row/col
+
+        int r_obj=0; int c_obj=0;
+
+        for(int i=0;i<6;i++){           //checking if the row contains more than 3 moon
+            if(board[row][i]==obj)     r_obj++;
+        }
+
+        for(int i=0;i<6;i++){           //checking if the colummn contains more than 3 moon
+            if(board[i][col]==obj)     c_obj++;
+        }
+
+        if(r_obj==3 || c_obj==3){
+            return false;
+        }
 
     return true;
 }
