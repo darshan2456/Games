@@ -1,6 +1,10 @@
 #include<stdio.h>
+#include<stdbool.h>
 
-void display_board_tango(char arr[6][6]){
+#define MOON 0
+#define SUN 77
+
+void display_board_tango(int arr[6][6]){
     printf("-------------------------------\n");
     for(int i=0;i<6;i++){
         for(int j=0;j<6;j++){
@@ -16,9 +20,56 @@ void display_board_tango(char arr[6][6]){
     }
 }
 
+bool check_if_valid(int board[6][6], int row, int col, int choice){
+
+    int obj;
+
+    if(choice==1){
+        obj=MOON;
+    }
+    else if(choice==2){
+        obj=SUN;
+    }
+
+    //below three if conditions check if there are three consecutive suns or moons (row-wise or column-wise)
+
+    //first condition - upper two      ||      second condition - lower two
+    if(board[row-1][col]==obj && board[row-2][col]==obj || board[row+1][col]==obj && board[row+2][col]==obj){
+        return false;
+    }
+    //first condiiton - right two      ||      second condition - left two
+    else if(board[row][col+1]==obj && board[row][col+2]==obj || board[row][col-1]==obj && board[row][col-2]==obj){
+        return false;
+    }
+    //middle of two - vertical      ||        middle of two - horizontal
+    else if(board[row-1][col]==obj && board[row+1][col]==obj || board[row][col-1]==obj && board[row][col+1]==obj){
+        return false;
+    }
+
+    //below we check if there are total 3 or less suns and moons in any row/col
+
+    int c_moon=0;int c_sun=0;int r_moon=0;int r_sun=0;
+
+    for(int i=0;i<6;i++){           //checking if the row contains more than 3 suns or moon
+        if(board[row][i]==MOON)     r_moon++;
+        if(board[row][i]==SUN)      r_sun++;
+    }
+
+    for(int i=0;i<6;i++){           //checking if the colummn contains more than 3 suns or moon
+        if(board[i][col]==MOON)     c_moon++;
+        if(board[i][col]==SUN)      c_sun++;
+    }
+    
+    if(r_moon>=3 || r_sun>=3 || c_moon>=3 || c_sun>=3){
+        return false;
+    }
+
+    return true;
+}
+
 void tango(){
 
-    char board[6][6];
+    int board[6][6];
     printf("Welcome to tango\n");
 
     printf("--------------------------\n");
@@ -42,38 +93,47 @@ void tango(){
     display_board_tango(board);
 
     for(int i=0;i<36;i++){
-        retry:
-        int block_choice=0;
-        printf("\nenter position of the block you want to fill:- ");
-        scanf("%d",&block_choice);
 
-        if(block_choice<1 || block_choice>36){
-            printf("invalid choice. choose only from 1 to 36.");
-            goto retry;
-        }
+        retry:
+        
+        int block_choice;
+
+        //loop to get the position of block
+        do {
+            printf("Enter position (1-36): ");
+            scanf("%d", &block_choice);
+            if(block_choice < 1 || block_choice > 36)
+                printf("Invalid. Choose 1 to 36.\n");
+        } while(block_choice < 1 || block_choice > 36);
 
         //determine block to be changed
         int row=(block_choice-1)/6;
         int col=(block_choice-1)%6;
 
-
-        again:
-
         int choice;
-        printf("\nenter 1 for moon and 2 for sun\n(and btw 66 is moon and 99 is sun, dont ask me why)\nenter here: ");
-        scanf("%d",&choice);
 
-        if(choice<1 || choice>2){
-            printf("only choose between 1 and 2");
-            goto again;
+        //loop to get one from sun and moon
+        do{
+            printf("\nenter 1 for moon and 2 for sun\n(and btw 66 is moon and 99 is sun, dont ask me why)\nenter here: ");
+            scanf("%d",&choice);
+
+            if(choice<1 || choice>2){
+                printf("only choose between 1 and 2");
+            }
+        }while(choice<1 || choice>2);
+
+        if(!check_if_valid(board,row,col,choice)){
+            printf("\ninvalid row or col, cant place in that block, try again\n");
+            display_board_tango(board);
+            goto retry;
         }
 
         if(choice==1){
-            board[row][col]='B';
+            board[row][col]=MOON;
             display_board_tango(board);
         }
         else if(choice==2){
-            board[row][col]='c';
+            board[row][col]=SUN;
             display_board_tango(board);
         }
     }
