@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <windows.h>
+#include "cross_platform_timer.h"
 
 void love() {
 
@@ -24,7 +24,8 @@ void love() {
                 while (ilu[i] != '\0') {
                     printf("%c", ilu[i]);
                     i++;
-                    Sleep(100);
+                    fflush(stdout);
+                    sleep_seconds(0.2);
                 }
                 printf("\n");
 
@@ -39,7 +40,8 @@ void love() {
                 while (ilu[i] != '\0') {
                     printf("%c", ilu[i]);
                     i++;
-                    Sleep(100);
+                    fflush(stdout);
+                    sleep_seconds(0.2);
                 }
                 printf("\n");
 
@@ -54,7 +56,8 @@ void love() {
                 while (ilu[i] != '\0') {
                     printf("%c", ilu[i]);
                     i++;
-                    Sleep(100);
+                    fflush(stdout);
+                    sleep_seconds(0.2);
                 }
                 printf("\n");
 
