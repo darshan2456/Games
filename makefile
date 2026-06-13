@@ -17,5 +17,9 @@ all: $(TARGET)
 $(TARGET) : $(SRCS)
 	$(CC) $(SRCS) -o $(TARGET)$(EXE)
 
+run: $(TARGET)
+
+	./$(TARGET)$(EXE)
+
 clean:
 	$(RM) $(TARGET)$(EXE)
