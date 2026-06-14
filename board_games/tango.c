@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include "clear_screen.h"
 
 #define MOON 0
 #define SUN 77
@@ -98,6 +99,8 @@ void tango(){
     display_board_tango(board);
 
     for(int i=0;i<36;i++){
+        clear_screen();
+        display_board_tango(board);
 
         retry:
         

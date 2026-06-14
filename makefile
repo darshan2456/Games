@@ -8,14 +8,15 @@ endif
 
 CC=gcc
 
-SRCS=$(wildcard *.c)
+SRCS=$(wildcard ./*.c ascii_art/*.c board_games/*.c utils/*.c)
+HEADERS=-Iascii_art -Iboard_games -Iutils
 
 TARGET=game
 
 all: $(TARGET)
 
 $(TARGET) : $(SRCS)
-	$(CC) $(SRCS) -o $(TARGET)$(EXE)
+	$(CC) $(HEADERS) $(SRCS) -o $(TARGET)$(EXE)
 
 run: $(TARGET)
 

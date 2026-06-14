@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdbool.h>
+#include "clear_screen.h"
 
 void display_board_ttt(char arr[3][3]){
     printf("---------------\n");
@@ -93,7 +94,12 @@ void tic_tac_toe(){
 
         for(int i=0;i<9;i++){
 
-            if(gameover==true)    break;
+            if(!gameover){
+                clear_screen();
+                display_board_ttt(board);
+            }
+
+            if(gameover)    break;
             retry:
             int choice;
             char xo;
