@@ -1,7 +1,8 @@
-This is a collection of games I have played and am going to implement it in C from scratch, right now only tic_tac_toe and lovw game is fully functional, logical structure of tango is in place.
+This is a collection of games of all kinds, which I have played and loved, and I am going to implement the same in C from scratch. 
 
+Tic-tac-toe is completely furnished and ready to play. along with cool and funky love game. Tango's core logic is in place, but needs some refinement before it is user friendly.
 
+Project is compiled with a simple Makefile.
 Run `make run` to compile and play the game in one go.
-
 
 More games coming soon......

@@ -1,68 +1,61 @@
 #include <stdio.h>
 #include "cross_platform_timer.h"
+#include "safe_input.h"
+
+void slow_print(char* word){
+    int i = 0;
+    printf("\n");
+    while (word[i] != '\0') {
+        printf("%c", word[i]);
+        i++;
+        fflush(stdout);
+        sleep_seconds(0.2);
+    }
+    printf("\n");
+}
+
 
 void love() {
 
     while(1){
 
         int size;
-        printf("\nEnter size of boobs (1,2 or 3 only) enter -1 to exit: ");
-        if(scanf("%d", &size)!=1){
-            printf("\ninvalid input, try again....");
-            continue;
-        }
+        int size_status=safe_input_int(&size,
+        "\nenter size of boobs between 1 and 3:- ",
+        1,3);
 
-        if(size==-1){
-            printf("Exiting love game.....");
+        if(size_status==INPUT_EXIT_SIGNAL){
             return;
+        }
+        else if(size_status==0){
+            continue;
         }
 
         switch (size) {
             case 1: {
-                char ilu[] = "i love your small boobs";
-                int i = 0;
-                while (ilu[i] != '\0') {
-                    printf("%c", ilu[i]);
-                    i++;
-                    fflush(stdout);
-                    sleep_seconds(0.2);
-                }
-                printf("\n");
+                char ilu[] = "small boobs";
+                slow_print(ilu);
 
-                char one[4] = " . ";
-                printf("(%s)(%s)\n", one, one);
+                char one[] = "( . )( . )\n";
+                printf(one);
                 break;
             }
 
             case 2: {
-                char ilu[] = "i love your average boobs";
-                int i = 0;
-                while (ilu[i] != '\0') {
-                    printf("%c", ilu[i]);
-                    i++;
-                    fflush(stdout);
-                    sleep_seconds(0.2);
-                }
-                printf("\n");
+                char ilu[] = "average boobs";
+                slow_print(ilu);
 
-                char two[6] = "  .  ";
-                printf("(%s)(%s)\n", two, two);
+                char two[] = "(  .  )(  .  )\n";
+                printf(two);
                 break;
             }
 
             case 3: {
-                char ilu[] = "i love your large boobs";
-                int i = 0;
-                while (ilu[i] != '\0') {
-                    printf("%c", ilu[i]);
-                    i++;
-                    fflush(stdout);
-                    sleep_seconds(0.2);
-                }
-                printf("\n");
+                char ilu[] = "large boobs";
+                slow_print(ilu);
 
-                char three[8] = "   .   ";
-                printf("(%s)(%s)\n", three, three);
+                char three[] = "(   .   )(   .   )\n";
+                printf(three);
                 break;
             }
 

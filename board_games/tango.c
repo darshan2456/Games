@@ -99,7 +99,7 @@ void tango(){
     display_board_tango(board);
 
     for(int i=0;i<36;i++){
-        clear_screen();
+        clear_screen;
         display_board_tango(board);
 
         retry:
@@ -122,7 +122,7 @@ void tango(){
 
         //loop to get one from sun and moon
         do{
-            printf("\nenter 1 for moon and 2 for sun\n(and btw 66 is moon and 99 is sun, dont ask me why)\nenter here: ");
+            printf("\nenter 1 for moon and 2 for sun\n(and btw 0 is moon and 77 is sun, dont ask me why)\nenter here: ");
             scanf("%d",&choice);
 
             if(choice<1 || choice>2){

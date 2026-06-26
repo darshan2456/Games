@@ -95,7 +95,7 @@ void tic_tac_toe(){
         for(int i=0;i<9;i++){
 
             if(!gameover){
-                clear_screen();
+                clear_screen;
                 display_board_ttt(board);
             }
 

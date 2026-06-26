@@ -2,11 +2,12 @@
 #include "tic_tac_toe.h"
 #include "tango.h"
 #include "love.h"
+#include "safe_input.h"
 void main(){
 
     while(1){
 
-        int game_choice=0;
+        int game_choice;
         printf("Welcome to 'Games' by Darshan Mukul Parekh\n"
                "Press '1' to play tic tac toe\n"
                "Press '2' to play tango\n"
@@ -14,14 +15,13 @@ void main(){
                "Press '-1' to exit\n"
                "enter here:- ");
         
-        if(scanf("%d",&game_choice)!=1){
-            printf("\nInvalid input. Try again");
-            continue;
-        }
+        int game_status=safe_input_int(&game_choice,NULL,1,3);
 
-        if(game_choice==-1){
-            printf("Exiting Games....");
+        if(game_status==INPUT_EXIT_SIGNAL){
             return;
+        }
+        if(game_status==0){
+            continue;
         }
 
         switch (game_choice)
