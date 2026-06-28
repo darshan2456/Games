@@ -9,11 +9,12 @@ void main(){
 
         int game_choice;
         printf("Welcome to 'Games' by Darshan Mukul Parekh\n"
-               "Press '1' to play tic tac toe\n"
-               "Press '2' to play tango\n"
-               "Press '3' to play the love game\n"
-               "Press '-1' to exit\n"
-               "enter here:- ");
+                "(at any point, press '-1' to exit that particular stage)\n"
+                "Press '1' to play tic tac toe\n"
+                "Press '2' to play tango\n"
+                "Press '3' to play the love game\n"
+                "Press '-1' to exit\n"
+                "enter here:- ");
         
         int game_status=safe_input_int(&game_choice,NULL,1,3);
 

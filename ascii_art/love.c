@@ -25,6 +25,7 @@ void love() {
         1,3);
 
         if(size_status==INPUT_EXIT_SIGNAL){
+            printf("\nExiting love game and returning to menu.....\n\n");
             return;
         }
         else if(size_status==0){

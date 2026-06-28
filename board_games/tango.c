@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include "clear_screen.h"
+#include "safe_input.h"
+#include "cross_platform_timer.h"
 
 #define MOON 0
 #define SUN 77
@@ -46,6 +48,14 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
     else if((col>=2 && col<=3) && board[row][col+1]==obj && board[row][col+2]==obj || board[row][col-1]==obj && board[row][col-2]==obj){
         return false;
     }
+    //third condition - rows adjacent to the borders
+    else if(row==0 && board[row+1][col]==obj && board[row+2][col]==obj || row==5 && board[row-1][col]==obj && board[row-2][col]==obj){
+        return false;
+    }
+    //fourth condition - columns adjacent to the borders
+    else if(col==0 && board[row][col+1]==obj && board[row][col+2]==obj || col==5 && board[row][col-1]==obj && board[row][col-2]==obj){
+        return false;
+    }
     //middle of two case:-                                               middle of two - vertical      ||        middle of two - horizontal
     else if((row>=1 && row<=4 && col>=1 && col<=4) && board[row-1][col]==obj && board[row+1][col]==obj || board[row][col-1]==obj && board[row][col+1]==obj){
         return false;
@@ -76,16 +86,7 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
 void tango(){
 
     int board[6][6];
-    printf("Welcome to tango\n");
-
-    printf("--------------------------\n");
-    printf("| 1   2   3   4   5   6  |\n");
-    printf("| 7   8   9   10  11  12 |\n");
-    printf("| 13  14  15  16  17  18 |\n");
-    printf("| 19  20  21  22  23  24 |\n");
-    printf("| 25  26  27  28  29  30 |\n");
-    printf("| 31  32  33  34  35  36 |\n");
-    printf("--------------------------\n");
+    printf("\nWelcome to tango\n\n");
 
 
     //initialization of board with position number of each block
@@ -96,54 +97,69 @@ void tango(){
         }
     }
 
-    display_board_tango(board);
 
     for(int i=0;i<36;i++){
-        clear_screen;
-        display_board_tango(board);
+        clear_screen();
 
-        retry:
+        if(i==0){
+            printf("\nWelcome to Tango\n\n");
+        }
+
+        display_board_tango(board);
         
         int block_choice;
+        int block_choice_status;
 
         //loop to get the position of block
-        do {
-            printf("Enter position (1-36): ");
-            scanf("%d", &block_choice);
-            if(block_choice < 1 || block_choice > 36)
-                printf("Invalid. Choose 1 to 36.\n");
-        } while(block_choice < 1 || block_choice > 36);
+        while(1){
+            block_choice_status=safe_input_int(&block_choice, "Enter position, between 1 and 36:- ",1,36);
+    
+            if(block_choice_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tango game and returning to menu....\n\n");
+                return;
+            }
+            else if(block_choice_status==0){
+                continue;
+            }
+
+            break;
+        }
 
         //determine block to be changed
         int row=(block_choice-1)/6;
         int col=(block_choice-1)%6;
 
         int choice;
+        int choice_status;
 
         //loop to get one from sun and moon
-        do{
-            printf("\nenter 1 for moon and 2 for sun\n(and btw 0 is moon and 77 is sun, dont ask me why)\nenter here: ");
-            scanf("%d",&choice);
-
-            if(choice<1 || choice>2){
-                printf("only choose between 1 and 2");
+        while(1){
+            choice_status=safe_input_int(&choice,"\nenter 1 for moon and 2 for sun\n(and btw 0 is moon and 77 is sun, dont ask me why)\nenter here: ",1,2);
+            
+            if(choice_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tango game and returning to menu....\n\n");
+                return;
             }
-        }while(choice<1 || choice>2);
+            else if(choice_status==0){
+                continue;
+            }
+
+            break;
+        }
 
         if(!check_if_valid(board,row,col,choice)){
             printf("\ninvalid row or col, cant place in that block, try again\n");
-            display_board_tango(board);
-            goto retry;
+            sleep_seconds(2);
+            continue;
         }
 
         if(choice==1){
             board[row][col]=MOON;
-            display_board_tango(board);
         }
         else if(choice==2){
             board[row][col]=SUN;
-            display_board_tango(board);
         }
+
     }
 
 }

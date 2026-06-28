@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdbool.h>
 #include "clear_screen.h"
+#include "safe_input.h"
 
 void display_board_ttt(char arr[3][3]){
     printf("---------------\n");
@@ -32,11 +33,11 @@ int who_won(char arr[3][3]){
     if(arr[0][0]=='O' && arr[0][1]=='O' && arr[0][2]=='O' || arr[1][0]=='O' && arr[1][1]=='O' && arr[1][2]=='O' || arr[2][0]=='O' && arr[2][1]=='O' && arr[2][2]=='O'){
         return 2;
     }
-    //col wise checking for player 1
+    //col wise checking for player 2
     else if(arr[0][0]=='O' && arr[1][0]=='O' && arr[2][0]=='O' || arr[0][1]=='O' && arr[1][1]=='O' && arr[2][1]=='O' || arr[0][2]=='O' && arr[1][2]=='O' && arr[2][2]=='O'){
         return 2;
     }
-    //diagonal checking for player 1
+    //diagonal checking for player 2
     else if(arr[0][0]=='O' && arr[1][1]=='O' && arr[2][2]=='O' || arr[0][2]=='O' && arr[1][1]=='O' && arr[2][0]=='O'){
         return 2;
     }
@@ -56,11 +57,8 @@ void tic_tac_toe(){
         printf("- 4  5  6 -\n");
         printf("- 7  8  9 -\n");
         printf("-----------\n");
-        printf("Rules are the same as normal. Enjoy the game!!!\n\n(To exit enter '-1', to continue enter any number)\n\n");
-        printf("Enter here:- ");
-        scanf("%d",&exit);
-
-        if(exit==-1)    break;
+        printf("Rules are the same as normal. Enjoy the game!!!\n\n");
+        
 
 
         //taking name of the players
@@ -91,13 +89,10 @@ void tic_tac_toe(){
         board[1][0]='4';board[1][1]='5';board[1][2]='6';
         board[2][0]='7';board[2][1]='8';board[2][2]='9';
 
+        clear_screen();
+        display_board_ttt(board);
 
         for(int i=0;i<9;i++){
-
-            if(!gameover){
-                clear_screen;
-                display_board_ttt(board);
-            }
 
             if(gameover)    break;
             retry:
@@ -113,11 +108,14 @@ void tic_tac_toe(){
                 printf("%s's turn:- ",player2);
             }
 
-            scanf("%d",&choice);
-
-            if(choice<1 || choice>9){
-                printf("Number must be between 1 and 9. Try againn\n");
-                goto retry;
+            int choice_status=safe_input_int(&choice,NULL,1,9);
+            
+            if(choice_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tic tac toe and returning to menu\n\n");
+                return;
+            }
+            else if(choice_status==0){
+                continue;
             }
 
             int row=(choice-1)/3;
@@ -125,10 +123,13 @@ void tic_tac_toe(){
 
             if(board[row][col]=='X' || board[row][col]=='O'){
                 printf("Position already filled. Try again");
-                goto retry;
+                continue;
             }
 
+            //marks X or O on the actual board
             board[row][col]=xo;
+            
+            clear_screen();
             display_board_ttt(board);
 
             int winner=who_won(board);
