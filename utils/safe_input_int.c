@@ -2,7 +2,7 @@
 
 int safe_input_int(int* input, char* prompt, int min, int max){
     if(prompt){
-        printf(prompt);
+        printf("%s",prompt);
         fflush(stdout);
     }
 
@@ -22,7 +22,7 @@ int safe_input_int(int* input, char* prompt, int min, int max){
         return -11;
     }
     if(val<min || val>max){
-        printf("Value must be between %d and %d.",min,max);
+        printf("Value must be between %d and %d. (press 'Enter' to continue)",min,max);
         goto cleanup;
     }
 
@@ -32,7 +32,7 @@ int safe_input_int(int* input, char* prompt, int min, int max){
 
     cleanup:
         int c;
-        while(c=getchar()!='\n' && c!=EOF);
+        while((c=getchar())!='\n' && c!=EOF);
         if(c==EOF){
             printf("EOF encountered");
             return 0;
