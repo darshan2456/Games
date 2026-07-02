@@ -65,25 +65,41 @@ void tic_tac_toe(){
         char player1[20];
         char player2[20];
 
+        input_start:
+
         while(1){
             int player_1_status=safe_input_string(player1,sizeof(player1),"enter name of first player, (20 chars max, enter 'X' to exit):-");
-            int player_2_status=safe_input_string(player2,sizeof(player2),"enter name of second player, (20 chars max, enter 'X' to exit):-");
 
-            if(player_1_status==0 || player_2_status==0){
+            if(player_1_status==0){
                 continue;
             }
 
-            if(strncmp(player1,player2,20)==0){
-                printf("both player names cant be same. Try again\n\n");
-                continue;
-            }
-
-            if(player_1_status==INPUT_EXIT_SIGNAL || player_2_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe....\n");
+            if(player_1_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tic tac toe....\n\n");
                 return;
             }
 
             break;
+        }
+
+        while(1){
+            int player_2_status=safe_input_string(player2,sizeof(player2),"enter name of second player, (20 chars max, enter 'X' to exit):-");
+
+            if(player_2_status==0){
+                continue;
+            }
+
+            if(player_2_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tic tac toe....\n\n");
+                return;
+            }
+
+            break;
+        }
+
+        if(strncmp(player1,player2,20)==0){
+            printf("both player names cant be same. Try again\n\n");
+            goto input_start;
         }
 
 

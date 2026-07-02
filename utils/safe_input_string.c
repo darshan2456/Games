@@ -22,7 +22,7 @@ int safe_input_string(char* input, size_t size, const char* prompt){
     }
     else{               //input was longer than buffer, discard remaining characters
         int c;
-        while((c=getchar())!='\n' || c!=EOF);
+        while((c=getchar())!='\n' && c!=EOF);
         printf("\nInput longer than capacity\n");
         return 0;
     }

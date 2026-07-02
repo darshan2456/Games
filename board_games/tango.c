@@ -1,17 +1,27 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<stdlib.h>
+#include<time.h>
 #include "clear_screen.h"
 #include "safe_input.h"
 #include "cross_platform_timer.h"
 
-#define MOON 0
-#define SUN 77
+#define circle 0
+#define square 77
+#define circle_symbol "\x1b[33m○\x1b[0m"
+#define sqaure_symbol "\x1b[32m□\x1b[0m"
 
 void display_board_tango(int arr[6][6]){
     printf("-------------------------------\n");
     for(int i=0;i<6;i++){
         for(int j=0;j<6;j++){
-            if(arr[i][j]<10){                           //for single digits
+            if(arr[i][j]==circle){
+                printf("| %s  ",circle_symbol);
+            }
+            else if(arr[i][j]==square){
+                printf("| %s  ",sqaure_symbol);
+            }
+            else if(arr[i][j]<10){                           //for single digits
                 printf("| %d  ",arr[i][j]);
             }
             else{                                       //for double digits
@@ -28,10 +38,10 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
     int obj;
 
     if(choice==1){
-        obj=MOON;
+        obj=circle;
     }
     else if(choice==2){
-        obj=SUN;
+        obj=square;
     }
 
 
@@ -41,11 +51,11 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
     // if(row==col)
 
     //first condition - upper two      ||      second condition - lower two
-    if((row>=2 && row<=3) && board[row-1][col]==obj && board[row-2][col]==obj || board[row+1][col]==obj && board[row+2][col]==obj){
+    if((row>=2 && row<=3) && board[row-1][col]==obj && board[row-2][col]==obj || (row>=2 && row<=3) && board[row+1][col]==obj && board[row+2][col]==obj){
         return false;
     }
     //second condiiton - right two      ||      second condition - left two
-    else if((col>=2 && col<=3) && board[row][col+1]==obj && board[row][col+2]==obj || board[row][col-1]==obj && board[row][col-2]==obj){
+    else if((col>=2 && col<=3) && board[row][col+1]==obj && board[row][col+2]==obj || (col>=2 && col<=3) && board[row][col-1]==obj && board[row][col-2]==obj){
         return false;
     }
     //third condition - rows adjacent to the borders
@@ -56,8 +66,8 @@ bool check_if_valid(int board[6][6], int row, int col, int choice){
     else if(col==0 && board[row][col+1]==obj && board[row][col+2]==obj || col==5 && board[row][col-1]==obj && board[row][col-2]==obj){
         return false;
     }
-    //middle of two case:-                                               middle of two - vertical      ||        middle of two - horizontal
-    else if((row>=1 && row<=4 && col>=1 && col<=4) && board[row-1][col]==obj && board[row+1][col]==obj || board[row][col-1]==obj && board[row][col+1]==obj){
+    //middle of two case:-                           middle of two - vertical      ||        middle of two - horizontal
+    else if((row>=1 && row<=4) && board[row-1][col]==obj && board[row+1][col]==obj || (col>=1 && col<=4) && board[row][col-1]==obj && board[row][col+1]==obj){
         return false;
     }
 
@@ -97,8 +107,45 @@ void tango(){
         }
     }
 
+    //allocating random circles and squares
 
-    for(int i=0;i<36;i++){
+    srand(time(NULL));      //Seed PRNG using seconds since the UNIX epoch
+
+    int placed = 0;
+    while (placed < 18)
+    {
+        int pos = rand() % 36;
+        int row = pos / 6;
+        int col = pos % 6;
+
+        if (board[row][col] == circle || board[row][col] == square)         //not empty cell then skip
+            continue;
+
+        int piece = (rand() % 2 == 0) ? circle : square;
+
+        int r_piece=0; int c_piece=0;
+
+        for(int i=0;i<6;i++){           //checking how many pieces, the row contains
+            if(board[row][i]==piece)     r_piece++;
+        }
+
+        for(int i=0;i<6;i++){           //checking how many pieces, the col contains
+            if(board[i][col]==piece)     c_piece++;
+        }
+
+        if(r_piece==2 || c_piece==2){
+            continue;
+        }
+
+        if (check_if_valid(board, row, col, piece))
+        {
+            board[row][col] = piece;
+            placed++;
+        }
+    }
+
+
+    for(int i=0;i<18;i++){
         clear_screen();
 
         if(i==0){
@@ -112,7 +159,7 @@ void tango(){
 
         //loop to get the position of block
         while(1){
-            block_choice_status=safe_input_int(&block_choice, "Enter position, between 1 and 36:- ",1,36);
+            block_choice_status=safe_input_int(&block_choice, "Enter position, between 1 and 36 (enter '-1' to exit):- ",1,36);
     
             if(block_choice_status==INPUT_EXIT_SIGNAL){
                 printf("\nExiting tango game and returning to menu....\n\n");
@@ -134,7 +181,7 @@ void tango(){
 
         //loop to get one from sun and moon
         while(1){
-            choice_status=safe_input_int(&choice,"\nenter 1 for moon and 2 for sun\n(and btw 0 is moon and 77 is sun, dont ask me why)\nenter here: ",1,2);
+            choice_status=safe_input_int(&choice,"\nenter 1 for circle and 2 for square (enter '-1' to exit):- ",1,2);
             
             if(choice_status==INPUT_EXIT_SIGNAL){
                 printf("\nExiting tango game and returning to menu....\n\n");
@@ -154,10 +201,10 @@ void tango(){
         }
 
         if(choice==1){
-            board[row][col]=MOON;
+            board[row][col]=circle;
         }
         else if(choice==2){
-            board[row][col]=SUN;
+            board[row][col]=square;
         }
 
     }
