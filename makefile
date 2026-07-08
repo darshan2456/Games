@@ -6,9 +6,9 @@ else
 	RM=rm -f
 endif
 
-CC=gcc
+CC=g++
 
-SRCS=$(wildcard ./*.c ascii_art/*.c board_games/*.c utils/*.c)
+SRCS=$(wildcard ./*.cpp ascii_art/*.cpp board_games/*.cpp utils/*.cpp)
 HEADERS=-Iascii_art -Iboard_games -Iutils
 
 TARGET=game

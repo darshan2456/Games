@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include "safe_input.h"
+#include <iostream>
+#include "safe_input.hpp"
 
-int safe_input_string(char* input, size_t size, const char* prompt){
-    if(prompt){
-        printf("%s",prompt);
+int safe_input_string(char* input, size_t size, const std::string prompt){
+    if(prompt.length()!=0){
+        std::cout<<prompt;
         fflush(stdout);
     }
 

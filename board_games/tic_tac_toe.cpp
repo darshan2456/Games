@@ -1,14 +1,23 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdbool.h>
-#include "clear_screen.h"
-#include "safe_input.h"
+#include "clear_screen.hpp"
+#include "safe_input.hpp"
+#include "tic_tac_toe.hpp"
 
 void display_board_ttt(char arr[3][3]){
     printf("---------------\n");
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            printf("| %c |",arr[i][j]);
+            if(arr[i][j]=='O'){
+                printf("|\033[33m O \033[0m|");
+            }
+            else if(arr[i][j]=='X'){
+                printf("|\033[32m X \033[0m|");
+            }
+            else{
+                printf("| %c |",arr[i][j]);
+            }
         }
         printf("\n--------------\n");
     }
@@ -45,12 +54,41 @@ int who_won(char arr[3][3]){
     return 0;
 }
 
-void tic_tac_toe(){
+void ttt_launcher(){
+    while(1){
+        int mode;
+        while(1){
+            printf("\n\nWelcome to tic tac toe!!!\n");
+            int mode_status=safe_input_int(&mode,"\nEnter 1 for computer and 2 for multiplayer:- ",1,2);
+            if(mode_status==0){
+                continue;
+            }
+            else if(mode_status==INPUT_EXIT_SIGNAL){
+                printf("\nExiting tic tac toe.....\n\n");
+                return;
+            }
+            break;
+        }
+
+        if(mode==1){
+            ttt_computer();
+        }
+        else if(mode==2){
+            ttt_multiplayer();
+        }
+    }
+}
+
+void ttt_computer(){
+    printf("\nComing soon....\n\n");
+    return;
+}
+
+void ttt_multiplayer(){
 
     while (1)
     {
-        int exit;
-        printf("\n\n\nWelcome to tic tac toe\n");
+        printf("\n\nWelcome to tic tac toe multiplayer\n\n");
         printf("These are the positions corresponding to the given numbers:-\n");
         printf("-----------\n");
         printf("- 1  2  3 -\n");
@@ -75,7 +113,7 @@ void tic_tac_toe(){
             }
 
             if(player_1_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe....\n\n");
+                printf("\nExiting tic tac toe multiplayer....\n\n");
                 return;
             }
 
@@ -90,7 +128,7 @@ void tic_tac_toe(){
             }
 
             if(player_2_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe....\n\n");
+                printf("\nExiting tic tac toe multiplayer....\n\n");
                 return;
             }
 
@@ -135,10 +173,10 @@ void tic_tac_toe(){
                 printf("%s's turn:- ",player2);
             }
 
-            int choice_status=safe_input_int(&choice,NULL,1,9);
+            int choice_status=safe_input_int(&choice,"\nenter here:- ",1,9);
             
             if(choice_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe and returning to menu....\n\n");
+                printf("\nExiting tic tac toe multiplayer....\n\n");
                 return;
             }
             else if(choice_status==0){
@@ -149,7 +187,7 @@ void tic_tac_toe(){
             int col=(choice-1)%3;
 
             if(board[row][col]=='X' || board[row][col]=='O'){
-                printf("Position already filled. Try again");
+                printf("Position already filled. Try again\n\n");
                 continue;
             }
 

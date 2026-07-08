@@ -2,9 +2,9 @@
 #include<stdbool.h>
 #include<stdlib.h>
 #include<time.h>
-#include "clear_screen.h"
-#include "safe_input.h"
-#include "cross_platform_timer.h"
+#include "clear_screen.hpp"
+#include "safe_input.hpp"
+#include "cross_platform_timer.hpp"
 
 #define circle 0
 #define square 77
@@ -144,11 +144,12 @@ void tango(){
         }
     }
 
+    int placed_player=0;
 
-    for(int i=0;i<18;i++){
+    while(placed_player<18){
         clear_screen();
 
-        if(i==0){
+        if(placed_player==0){
             printf("\nWelcome to Tango\n\n");
         }
 
@@ -202,9 +203,11 @@ void tango(){
 
         if(choice==1){
             board[row][col]=circle;
+            placed_player++;
         }
         else if(choice==2){
             board[row][col]=square;
+            placed_player++;
         }
 
     }

@@ -1,8 +1,10 @@
 #include<stdio.h>
+#include<string>
+#include<iostream>
 
-int safe_input_int(int* input, char* prompt, int min, int max){
-    if(prompt){
-        printf("%s",prompt);
+int safe_input_int(int* input, const std::string prompt, int min, int max){
+    if(prompt.length()!=0){
+        std::cout<<prompt;
         fflush(stdout);
     }
 
