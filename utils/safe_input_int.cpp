@@ -36,7 +36,8 @@ int safe_input_int(int* input, const std::string prompt, int min, int max){
         int c;
         while((c=getchar())!='\n' && c!=EOF);
         if(c==EOF){
-            printf("EOF encountered");
+            clearerr(stdin);
+            printf("\n\nEOF encountered\n\n");
             return 0;
         }
         return 0;

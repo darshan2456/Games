@@ -107,51 +107,50 @@ void tango(){
         }
     }
 
-    //allocating random circles and squares
+    // allocating random circles and squares
 
-    srand(time(NULL));      //Seed PRNG using seconds since the UNIX epoch
+    // srand(time(NULL));      //Seed PRNG using seconds since the UNIX epoch
 
-    int placed = 0;
-    while (placed < 18)
-    {
-        int pos = rand() % 36;
-        int row = pos / 6;
-        int col = pos % 6;
+    // int placed = 0;
+    // while (placed < 18)
+    // {
+    //     int pos = rand() % 36;
+    //     int row = pos / 6;
+    //     int col = pos % 6;
 
-        if (board[row][col] == circle || board[row][col] == square)         //not empty cell then skip
-            continue;
+    //     if (board[row][col] == circle || board[row][col] == square)         //not empty cell then skip
+    //         continue;
 
-        int piece = (rand() % 2 == 0) ? circle : square;
+    //     int piece = (rand() % 2 == 0) ? circle : square;
 
-        int r_piece=0; int c_piece=0;
+    //     int r_piece=0; int c_piece=0;
 
-        for(int i=0;i<6;i++){           //checking how many pieces, the row contains
-            if(board[row][i]==piece)     r_piece++;
-        }
+    //     for(int i=0;i<6;i++){           //checking how many pieces, the row contains
+    //         if(board[row][i]==piece)     r_piece++;
+    //     }
 
-        for(int i=0;i<6;i++){           //checking how many pieces, the col contains
-            if(board[i][col]==piece)     c_piece++;
-        }
+    //     for(int i=0;i<6;i++){           //checking how many pieces, the col contains
+    //         if(board[i][col]==piece)     c_piece++;
+    //     }
 
-        if(r_piece==2 || c_piece==2){
-            continue;
-        }
+    //     if(r_piece==2 || c_piece==2){
+    //         continue;
+    //     }
 
-        if (check_if_valid(board, row, col, piece))
-        {
-            board[row][col] = piece;
-            placed++;
-        }
-    }
+    //     if (check_if_valid(board, row, col, piece))
+    //     {
+    //         board[row][col] = piece;
+    //         placed++;
+    //     }
+    // }
 
-    int placed_player=0;
+    int placed=0;
 
-    while(placed_player<18){
+    printf("\nWelcome to Tango\n\n");
+    display_board_tango(board);
+
+    while(placed<36){
         clear_screen();
-
-        if(placed_player==0){
-            printf("\nWelcome to Tango\n\n");
-        }
 
         display_board_tango(board);
         
@@ -202,13 +201,26 @@ void tango(){
         }
 
         if(choice==1){
-            board[row][col]=circle;
-            placed_player++;
+            if(board[row][col]!=circle && board[row][col]!=square){
+                board[row][col]=circle;
+                placed++;
+            }
+            else{
+                board[row][col]=circle;
+            }
         }
         else if(choice==2){
-            board[row][col]=square;
-            placed_player++;
+            if(board[row][col]!=circle && board[row][col]!=square){
+                board[row][col]=square;
+                placed++;
+            }
+            else{
+                board[row][col]=square;
+            }
+
         }
+
+        display_board_tango(board);
 
     }
 

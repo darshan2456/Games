@@ -10,7 +10,8 @@ int safe_input_string(char* input, size_t size, const std::string prompt){
     }
 
     if(fgets(input,size,stdin)==NULL){
-        printf("\nEOF encountered.\n");
+        clearerr(stdin);
+        printf("\n\nEOF encountered.\n\n");
         return 0;
     }
 
