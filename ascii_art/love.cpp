@@ -6,7 +6,6 @@
 #include "safe_input.hpp"
 
 void slow_print(const std::string word){
-    int i = 0;
     std::cout << "\n\n";
     
     for (size_t i = 0; i < word.length(); i++) {
