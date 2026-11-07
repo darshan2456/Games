@@ -5,15 +5,15 @@
 #include "clear_screen.hpp"
 #include "safe_input.hpp"
 
-void slow_print(const std::string word){
+void slow_print(const std::string& word){
     std::cout << "\n\n";
-    
-    for (size_t i = 0; i < word.length(); i++) {
-        std::cout << word[i];
-        std::cout.flush();         
+
+    for (char ch : word) {
+        std::cout << ch;
+        std::cout.flush();
         sleep_seconds(0.2);
     }
-    
+
     std::cout << "\n";
 }
 
@@ -27,8 +27,8 @@ void love() {
         "\nenter size of boobs between 1 and 3:- ",
         1,3);
 
-        if(size_status==INPUT_EXIT_SIGNAL){
-            printf("\nExiting love game and returning to menu.....\n\n");
+        if(size_status==INPUT_EXIT_SIGNAL || size_status==INPUT_EOF_SIGNAL){
+            std::cout<< "\nExiting love game and returning to menu.....\n\n";
             return;
         }
         else if(size_status==0){
@@ -37,12 +37,11 @@ void love() {
 
         switch (size) {
             case 1: {
-                clear_screen(); 
+                clear_screen();
                 std::string ilu = "small boobs";
                 slow_print(ilu);
 
-                std::string one = "( . )( . )\n";
-                std::cout<<one;
+                std::cout << "( . )( . )\n";
                 sleep_seconds(2);
                 clear_screen();
                 break;
@@ -53,8 +52,7 @@ void love() {
                 std::string ilu = "average boobs";
                 slow_print(ilu);
 
-                std::string two = "(  .  )(  .  )\n";
-                std::cout<<two;
+                std::cout << "(  .  )(  .  )\n";
                 sleep_seconds(2);
                 clear_screen();
                 break;
@@ -65,8 +63,7 @@ void love() {
                 std::string ilu = "large boobs";
                 slow_print(ilu);
 
-                std::string three = "(   .   )(   .   )\n";
-                std::cout<<three;
+                std::cout << "(   .   )(   .   )\n";
                 sleep_seconds(2);
                 clear_screen();
                 break;

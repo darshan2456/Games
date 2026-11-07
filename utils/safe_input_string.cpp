@@ -1,42 +1,34 @@
-#include <stdio.h>
-#include <string.h>
 #include <iostream>
+#include <string>
+
 #include "safe_input.hpp"
 
-int safe_input_string(char* input, size_t size, const std::string prompt){
-    if(prompt.length()!=0){
-        std::cout<<prompt;
-        fflush(stdout);
+int safe_input_string(std::string& input, const std::string& prompt, std::size_t max_length)
+{
+
+    std::cout << prompt;
+
+    std::string line;
+
+    if (!std::getline(std::cin, line)) {
+        return INPUT_EOF_SIGNAL;
     }
 
-    if(fgets(input,size,stdin)==NULL){
-        clearerr(stdin);
-        printf("\n\nEOF encountered.\n\n");
+    if (line.empty()) {
+        std::cout << "\nInput cannot be empty.\n";
         return 0;
     }
 
-    size_t len=strlen(input);
-
-    //remove trailing newline
-    if(len>0 && input[len-1]=='\n'){
-        input[len-1]='\0';
-        len--;
-    }
-    else{               //input was longer than buffer, discard remaining characters
-        int c;
-        while((c=getchar())!='\n' && c!=EOF);
-        printf("\nInput longer than capacity\n");
+    if (line.length() > max_length) {
+        std::cout << "\nInput exceeds maximum length.\n";
         return 0;
     }
 
-    if(len==0){
-        printf("\ninput cannot be empty\n");
-        return 0;
-    }
-
-    if(strcmp(input,"X")==0){
+    if (line == "X") {
         return INPUT_EXIT_SIGNAL;
     }
+
+    input = line;
 
     return 1;
 }

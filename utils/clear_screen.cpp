@@ -1,16 +1,18 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <iostream>
 
 #ifdef _WIN32
 
-    #define clear  system("cls")
+#include <cstdlib>
+
+void clear_screen() {
+    std::system("cls");
+}
 
 #else
 
-    #define clear  printf("\033[2J\033[H")
+void clear_screen() {
+    std::cout << "\033[2J\033[H";
+    std::cout.flush();
+}
 
 #endif
-
-void clear_screen(){
-    clear;
-}

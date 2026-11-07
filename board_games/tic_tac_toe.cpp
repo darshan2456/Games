@@ -1,29 +1,33 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdbool.h>
+#include <array>
+#include <iostream>
+#include <string>
 #include "clear_screen.hpp"
 #include "safe_input.hpp"
 #include "tic_tac_toe.hpp"
 
-void display_board_ttt(char arr[3][3]){
-    printf("---------------\n");
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            if(arr[i][j]=='O'){
-                printf("|\033[33m O \033[0m|");
+
+void display_board_ttt(const Board& board){
+    std::cout << "---------------\n";
+    for (const auto& row : board) {
+
+            for (char cell : row) {
+
+                if (cell == 'O') {
+                    std::cout << "|\033[33m O \033[0m|";
+                }
+                else if (cell == 'X') {
+                    std::cout << "|\033[32m X \033[0m|";
+                }
+                else {
+                    std::cout << "| " << cell << " |";
+                }
             }
-            else if(arr[i][j]=='X'){
-                printf("|\033[32m X \033[0m|");
-            }
-            else{
-                printf("| %c |",arr[i][j]);
-            }
+
+            std::cout << "\n--------------\n";
         }
-        printf("\n--------------\n");
-    }
 }
 
-int who_won(char arr[3][3]){
+int who_won(const Board& arr){
     //row wise checking for player 1
     if(arr[0][0]=='X' && arr[0][1]=='X' && arr[0][2]=='X' || arr[1][0]=='X' && arr[1][1]=='X' && arr[1][2]=='X' || arr[2][0]=='X' && arr[2][1]=='X' && arr[2][2]=='X'){
         return 1;
@@ -50,7 +54,7 @@ int who_won(char arr[3][3]){
     else if(arr[0][0]=='O' && arr[1][1]=='O' && arr[2][2]=='O' || arr[0][2]=='O' && arr[1][1]=='O' && arr[2][0]=='O'){
         return 2;
     }
-    
+
     return 0;
 }
 
@@ -58,13 +62,13 @@ void ttt_launcher(){
     while(1){
         int mode;
         while(1){
-            printf("\n\nWelcome to tic tac toe!!!\n");
+            std::cout << "\n==============================\n\nWelcome to tic tac toe!!!\n";
             int mode_status=safe_input_int(&mode,"\nEnter 1 for computer and 2 for multiplayer:- ",1,2);
             if(mode_status==0){
                 continue;
             }
-            else if(mode_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe.....\n\n");
+            else if(mode_status==INPUT_EXIT_SIGNAL || mode_status==INPUT_EOF_SIGNAL){
+                std::cout << "\nExiting tic tac toe.....\n\n";
                 return;
             }
             break;
@@ -80,7 +84,7 @@ void ttt_launcher(){
 }
 
 void ttt_computer(){
-    printf("\nComing soon....\n\n");
+    std::cout << "\nComing soon....\n\n" ;
     return;
 }
 
@@ -88,32 +92,39 @@ void ttt_multiplayer(){
 
     while (1)
     {
-        printf("\n\nWelcome to tic tac toe multiplayer\n\n");
-        printf("These are the positions corresponding to the given numbers:-\n");
-        printf("-----------\n");
-        printf("- 1  2  3 -\n");
-        printf("- 4  5  6 -\n");
-        printf("- 7  8  9 -\n");
-        printf("-----------\n");
-        printf("Rules are the same as normal. Enjoy the game!!!\n\n");
-        
+
+        Board board{{
+            {{'1', '2', '3'}},
+            {{'4', '5', '6'}},
+            {{'7', '8', '9'}}
+        }};
+
+        std::cout << "\n===================================\n\nWelcome to tic tac toe multiplayer\n\n";
+        std::cout << "These are the positions corresponding to the given numbers:-\n";
+        std::cout << "-----------\n";
+        std::cout << "- 1  2  3 -\n";
+        std::cout << "- 4  5  6 -\n";
+        std::cout << "- 7  8  9 -\n";
+        std::cout << "-----------\n";
+        std::cout << "Rules are the same as normal. Enjoy the game!!!\n\n";
+
 
 
         //taking name of the players
-        char player1[20];
-        char player2[20];
+        std::string player1;
+        std::string player2;
 
         input_start:
 
         while(1){
-            int player_1_status=safe_input_string(player1,sizeof(player1),"enter name of first player, (20 chars max, enter 'X' to exit):-");
+            int player_1_status=safe_input_string(player1,"enter name of first player, (20 chars max, enter 'X' to exit):-",19);
 
             if(player_1_status==0){
                 continue;
             }
 
-            if(player_1_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe multiplayer....\n\n");
+            if(player_1_status==INPUT_EXIT_SIGNAL || player_1_status==INPUT_EOF_SIGNAL){
+                std::cout << "\nExiting tic tac toe multiplayer....\n\n";
                 return;
             }
 
@@ -121,38 +132,31 @@ void ttt_multiplayer(){
         }
 
         while(1){
-            int player_2_status=safe_input_string(player2,sizeof(player2),"enter name of second player, (20 chars max, enter 'X' to exit):-");
+            int player_2_status=safe_input_string(player2,"enter name of second player, (20 chars max, enter 'X' to exit):-",19);
 
             if(player_2_status==0){
                 continue;
             }
 
-            if(player_2_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe multiplayer....\n\n");
+            if(player_2_status==INPUT_EXIT_SIGNAL || player_2_status==INPUT_EOF_SIGNAL){
+                std::cout << "\nExiting tic tac toe multiplayer....\n\n";
                 return;
             }
 
             break;
         }
 
-        if(strncmp(player1,player2,20)==0){
-            printf("both player names cant be same. Try again\n\n");
+        if(player1==player2){
+            std::cout << "both player names cant be same. Try again\n\n";
             goto input_start;
         }
 
 
 
-        //setting up the matrix
-        char board[3][3];
-        int winner=0;
+        //setting up state variables
         bool gameover=false;
+        int winner=0;
 
-
-        //setting default value of the board
-        
-        board[0][0]='1';board[0][1]='2';board[0][2]='3';
-        board[1][0]='4';board[1][1]='5';board[1][2]='6';
-        board[2][0]='7';board[2][1]='8';board[2][2]='9';
 
         clear_screen();
         display_board_ttt(board);
@@ -166,52 +170,53 @@ void ttt_multiplayer(){
 
             if(i%2==0){
                 xo='X';
-                printf("%s's turn:- ",player1);
+                std::cout << player1 << "'s turn:- ";
             }
             else{
                 xo='O';
-                printf("%s's turn:- ",player2);
+                std::cout << player2 << "'s turn:- ";
             }
 
             int choice_status=safe_input_int(&choice,"\nenter here:- ",1,9);
-            
-            if(choice_status==INPUT_EXIT_SIGNAL){
-                printf("\nExiting tic tac toe multiplayer....\n\n");
+
+            if(choice_status==INPUT_EXIT_SIGNAL || choice_status==INPUT_EOF_SIGNAL){
+                std::cout << "\nExiting tic tac toe multiplayer....\n\n";
                 return;
             }
             else if(choice_status==0){
-                continue;
+                std::cout << "Invalid input, Try again";
+                goto retry;
             }
 
             int row=(choice-1)/3;
             int col=(choice-1)%3;
 
             if(board[row][col]=='X' || board[row][col]=='O'){
-                printf("Position already filled. Try again\n\n");
-                continue;
+                std::cout << "Position already filled. Try again\n\n";
+                goto retry;
             }
 
             //marks X or O on the actual board
             board[row][col]=xo;
-            
+
             clear_screen();
             display_board_ttt(board);
 
-            int winner=who_won(board);
+            winner=who_won(board);
             if(winner==1){
-                printf("\n%s won!!!",player1);
+                std::cout << player1 << " won!!!";
                 gameover=true;
             }
             else if(winner==2){
-                printf("\n%s won!!!",player2);
+                std::cout << player2 << " won!!!";
                 gameover=true;
             }
 
         }
 
-        if(!gameover)   printf("\nGame draw\n");
+        if(!gameover)   std::cout << "\nGame draw\n";
 
-        printf("\n\n========================================");
+        std::cout << "\n\n========================================";
 
     }
-}  
+}

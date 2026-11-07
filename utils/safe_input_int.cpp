@@ -1,45 +1,42 @@
-#include<stdio.h>
-#include<string>
-#include<iostream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
-int safe_input_int(int* input, const std::string prompt, int min, int max){
-    if(prompt.length()!=0){
-        std::cout<<prompt;
-        fflush(stdout);
+#include "safe_input.hpp"
+
+int safe_input_int(int& input, const std::string& prompt, int min, int max)
+{
+
+    std::cout << prompt;
+
+    std::string line;
+
+    if (!std::getline(std::cin, line)) {
+        return INPUT_EOF_SIGNAL;
     }
+
+    std::istringstream stream(line);
 
     int val;
     char extra_char;
 
-    if(scanf("%d",&val)!=1){
-        goto cleanup;
+    if (!(stream >> val) || (stream >> extra_char)) {
+        std::cout << "\nOnly numbers are allowed.\n";
+        return 0;
     }
 
-    if(scanf("%c",&extra_char)!=1 && extra_char!='\n'){
-        printf("\nonly number, no extra characters please");
-        goto cleanup;
+    if (val == -1) {
+        return INPUT_EXIT_SIGNAL;
     }
 
-    if(val==-1){
-        return -11;
-    }
-    if(val<min || val>max){
-        printf("Value must be between %d and %d. (press 'Enter' to continue)",min,max);
-        goto cleanup;
+    if (val < min || val > max) {
+        std::cout << "\nValue must be between "
+                  << min << " and " << max << ".\n";
+
+        return 0;
     }
 
-    *input=val;
+    input = val;
 
     return 1;
-
-    cleanup:
-        int c;
-        while((c=getchar())!='\n' && c!=EOF);
-        if(c==EOF){
-            clearerr(stdin);
-            printf("\n\nEOF encountered\n\n");
-            return 0;
-        }
-        return 0;
-    
 }
