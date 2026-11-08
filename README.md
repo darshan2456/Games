@@ -4,7 +4,8 @@ Tic-tac-toe is completely furnished and ready to play.
 
 Demo:- 
 
-<img width="900" height="604" alt="Screencast From 2026-11-08 23-57-01" src="https://github.com/user-attachments/assets/1dee8392-3ef8-46dc-98d2-e490a7629bc7" />
+<img width="1280" height="720" alt="Screencast From 2026-11-08 23-57-01" src="https://github.com/user-attachments/assets/2d540e0c-e923-4353-b003-4f4bd503d339" />
+
 
 
 
