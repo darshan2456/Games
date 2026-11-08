@@ -23,7 +23,7 @@ void love() {
     while(1){
 
         int size;
-        int size_status=safe_input_int(&size,
+        int size_status=safe_input_int(size,
         "\nenter size of boobs between 1 and 3:- ",
         1,3);
 

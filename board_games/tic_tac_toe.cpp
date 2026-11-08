@@ -29,29 +29,29 @@ void display_board_ttt(const Board& board){
 
 int who_won(const Board& arr){
     //row wise checking for player 1
-    if(arr[0][0]=='X' && arr[0][1]=='X' && arr[0][2]=='X' || arr[1][0]=='X' && arr[1][1]=='X' && arr[1][2]=='X' || arr[2][0]=='X' && arr[2][1]=='X' && arr[2][2]=='X'){
+    if( (arr[0][0]=='X' && arr[0][1]=='X' && arr[0][2]=='X') || (arr[1][0]=='X' && arr[1][1]=='X' && arr[1][2]=='X') || (arr[2][0]=='X' && arr[2][1]=='X' && arr[2][2]=='X') ){
         return 1;
     }
     //col wise checking for player 1
-    else if(arr[0][0]=='X' && arr[1][0]=='X' && arr[2][0]=='X' || arr[0][1]=='X' && arr[1][1]=='X' && arr[2][1]=='X' || arr[0][2]=='X' && arr[1][2]=='X' && arr[2][2]=='X'){
+    else if( (arr[0][0]=='X' && arr[1][0]=='X' && arr[2][0]=='X') || (arr[0][1]=='X' && arr[1][1]=='X' && arr[2][1]=='X') || (arr[0][2]=='X' && arr[1][2]=='X' && arr[2][2]=='X') ){
         return 1;
     }
     //diagonal checking for player 1
-    else if(arr[0][0]=='X' && arr[1][1]=='X' && arr[2][2]=='X' || arr[0][2]=='X' && arr[1][1]=='X' && arr[2][0]=='X'){
+    else if( (arr[0][0]=='X' && arr[1][1]=='X' && arr[2][2]=='X') || (arr[0][2]=='X' && arr[1][1]=='X' && arr[2][0]=='X') ){
         return 1;
     }
 
 
     //row wise checking for player 2
-    if(arr[0][0]=='O' && arr[0][1]=='O' && arr[0][2]=='O' || arr[1][0]=='O' && arr[1][1]=='O' && arr[1][2]=='O' || arr[2][0]=='O' && arr[2][1]=='O' && arr[2][2]=='O'){
+    if( (arr[0][0]=='O' && arr[0][1]=='O' && arr[0][2]=='O') || (arr[1][0]=='O' && arr[1][1]=='O' && arr[1][2]=='O') || (arr[2][0]=='O' && arr[2][1]=='O' && arr[2][2]=='O') ){
         return 2;
     }
     //col wise checking for player 2
-    else if(arr[0][0]=='O' && arr[1][0]=='O' && arr[2][0]=='O' || arr[0][1]=='O' && arr[1][1]=='O' && arr[2][1]=='O' || arr[0][2]=='O' && arr[1][2]=='O' && arr[2][2]=='O'){
+    else if( (arr[0][0]=='O' && arr[1][0]=='O' && arr[2][0]=='O') || (arr[0][1]=='O' && arr[1][1]=='O' && arr[2][1]=='O') || (arr[0][2]=='O' && arr[1][2]=='O' && arr[2][2]=='O') ){
         return 2;
     }
     //diagonal checking for player 2
-    else if(arr[0][0]=='O' && arr[1][1]=='O' && arr[2][2]=='O' || arr[0][2]=='O' && arr[1][1]=='O' && arr[2][0]=='O'){
+    else if( (arr[0][0]=='O' && arr[1][1]=='O' && arr[2][2]=='O') || (arr[0][2]=='O' && arr[1][1]=='O' && arr[2][0]=='O') ){
         return 2;
     }
 
@@ -63,7 +63,7 @@ void ttt_launcher(){
         int mode;
         while(1){
             std::cout << "\n==============================\n\nWelcome to tic tac toe!!!\n";
-            int mode_status=safe_input_int(&mode,"\nEnter 1 for computer and 2 for multiplayer:- ",1,2);
+            int mode_status=safe_input_int(mode,"\nEnter 1 for computer and 2 for multiplayer:- ",1,2);
             if(mode_status==0){
                 continue;
             }
@@ -161,6 +161,7 @@ void ttt_multiplayer(){
         clear_screen();
         display_board_ttt(board);
 
+        //actual game loop
         for(int i=0;i<9;i++){
 
             if(gameover)    break;
@@ -177,7 +178,7 @@ void ttt_multiplayer(){
                 std::cout << player2 << "'s turn:- ";
             }
 
-            int choice_status=safe_input_int(&choice,"\nenter here:- ",1,9);
+            int choice_status=safe_input_int(choice,"\nenter here:- ",1,9);
 
             if(choice_status==INPUT_EXIT_SIGNAL || choice_status==INPUT_EOF_SIGNAL){
                 std::cout << "\nExiting tic tac toe multiplayer....\n\n";

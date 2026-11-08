@@ -1,3 +1,5 @@
+#pragma once
+
 #include <array>
 
 using Board = std::array<std::array<char, 3>, 3>;
