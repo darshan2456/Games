@@ -11,7 +11,7 @@ int main() {
         int game_choice;
 
         int game_status = safe_input_int(
-            &game_choice,
+            game_choice,
             "Welcome to 'Games' by Darshan Mukul Parekh\n"
             "(At any point, press '-1' to exit that particular stage)\n\n"
             "Press '1' to play tic tac toe\n"

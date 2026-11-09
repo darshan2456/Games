@@ -1,16 +1,5 @@
-#ifdef _WIN32
-
-#include<windows.h>
-#define SLEEP(val)  Sleep(val*1000)
-
-#else
-
-#include <unistd.h>
-#define SLEEP(val)  usleep(val*1000000)
-
-#endif
-
-//enter number of seconds in floating point
-void sleep_seconds(float val){
-    SLEEP(val);
+#include <thread>
+#include <chrono>
+void sleep_seconds(double val){
+    std::this_thread::sleep_for( std::chrono::duration<double>(val) );
 }

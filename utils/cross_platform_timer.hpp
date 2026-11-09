@@ -1,3 +1,3 @@
 #pragma once
 
-void sleep_seconds(float val);
+void sleep_seconds(double val);
