@@ -8,7 +8,7 @@ Board::Board(){
 }
 
 void Board::display() const{
-    std::cout<<"------------------------------\n";
+    std::cout<<"---------------\n";
 
     for(const auto& row:board){
         for(const auto& cell:row){
@@ -23,7 +23,7 @@ void Board::display() const{
             }
         }
 
-        std::cout<<"-------------------------------\n";
+        std::cout<<"\n---------------\n";
     }
 }
 
@@ -37,7 +37,7 @@ bool Board::make_move(int row, int col, char symbol){
         return false;
     }
 
-    board[row][col]==symbol;
+    board[row][col]=symbol;
 
     return true;
 }
@@ -53,7 +53,7 @@ bool Board::check_winner(char symbol) const{
 
     //column wise checking
     for(int i=0;i<3;i++){
-        if(board[1][i]==symbol && board[2][i]==symbol && board[3][i]==symbol){
+        if(board[0][i]==symbol && board[1][i]==symbol && board[2][i]==symbol){
             return true;
         }
     }

@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-#include "safe_input.hpp"
+#include "safeInput.hpp"
 
 int safe_input_int(int& input, const std::string& prompt, int min, int max)
 {
@@ -21,7 +21,7 @@ int safe_input_int(int& input, const std::string& prompt, int min, int max)
     char extra_char;
 
     if (!(stream >> val) || (stream >> extra_char)) {
-        std::cout << "\nOnly numbers are allowed.\n";
+        std::cout << "\nOnly numbers are allowed.\n\n";
         return 0;
     }
 
@@ -31,7 +31,7 @@ int safe_input_int(int& input, const std::string& prompt, int min, int max)
 
     if (val < min || val > max) {
         std::cout << "\nValue must be between "
-                  << min << " and " << max << ".\n";
+                  << min << " and " << max << ".\n\n";
 
         return 0;
     }

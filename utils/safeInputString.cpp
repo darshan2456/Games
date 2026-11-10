@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "safe_input.hpp"
+#include "safeInput.hpp"
 
 int safe_input_string(std::string& input, const std::string& prompt, std::size_t max_length)
 {

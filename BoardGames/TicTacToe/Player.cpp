@@ -7,6 +7,8 @@ Player::Player(const std::string& name, char symbol){
     this->symbol=symbol;
 }
 
+//getter functions for name and symbol
+
 std::string Player::getName() const{
     return name;
 }
