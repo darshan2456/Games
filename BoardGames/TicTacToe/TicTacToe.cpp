@@ -34,7 +34,7 @@ bool TicTacToe::getPlayerNames(){
 
         //infinite loop to take first player name
         while(1){
-            int status=safe_input_string(name1, "Enter name of first player (20 chars max, enter 'X' to exit):- ", 20);
+            int status=safeInputString(name1, "Enter name of first player (20 chars max, enter 'X' to exit):- ", 20);
 
             if(status==0){
                 continue;
@@ -50,7 +50,7 @@ bool TicTacToe::getPlayerNames(){
 
         //infinite loop to take second player name
         while(1){
-            int status=safe_input_string(name2, "Enter name of second player (20 chars max, enter 'X' to exit):- ", 20);
+            int status=safeInputString(name2, "Enter name of second player (20 chars max, enter 'X' to exit):- ", 20);
 
             if(status==0){
                 continue;
@@ -84,7 +84,7 @@ bool TicTacToe::playTurn(const Player &curr_player){
 
         std::cout<<curr_player.getName() << "'s turn:- ";
 
-        int status=safe_input_int(choice, "\nEnter here:- ", 1, 9);
+        int status=safeInputInt(choice, "\nEnter here:- ", 1, 9);
 
         if(status==INPUT_EXIT_SIGNAL || status==INPUT_EOF_SIGNAL){
             std::cout<<"\nExiting tic tac toe multiplayer....\n\n";
@@ -100,12 +100,12 @@ bool TicTacToe::playTurn(const Player &curr_player){
         int row=(choice-1)/3;
         int col=(choice-1)%3;
 
-        if(!board.make_move(row, col, curr_player.getSymbol())){
+        if(!board.makeMove(row, col, curr_player.getSymbol())){
             std::cout << "Position already filled. Try again.\n\n";
             continue;
         }
 
-        clear_screen();
+        clearScreen();
         board.display();
 
         return true;
@@ -128,7 +128,7 @@ void TicTacToe::playMultiplayer(){
             return;
         }
 
-        clear_screen();
+        clearScreen();
         board.display();
 
         //true=player1's turn
@@ -136,7 +136,7 @@ void TicTacToe::playMultiplayer(){
         bool player1Turn=true;
 
         //game loop
-        while(!gameover && !board.is_full()){
+        while(!gameover && !board.isFull()){
             const Player& currentPlayer = player1Turn ? player1 : player2;
 
             if(!playTurn(currentPlayer)){
@@ -144,7 +144,7 @@ void TicTacToe::playMultiplayer(){
             }
 
             //check whether current player won
-            if(board.check_winner(currentPlayer.getSymbol())){
+            if(board.checkWinner(currentPlayer.getSymbol())){
                 std::cout<<"\n"<<currentPlayer.getName()<<" won!!!\n";
                 gameover=true;
                 break;
@@ -167,7 +167,7 @@ void TicTacToe::startGame(){
     while(1){
         int mode;
 
-        int status=safe_input_int(mode, "\nEnter 1 for computer and 2 for multiplayer:- ", 1, 2);
+        int status=safeInputInt(mode, "\nEnter 1 for computer and 2 for multiplayer:- ", 1, 2);
 
         if(status==0){
             continue;

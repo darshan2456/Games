@@ -4,14 +4,14 @@
 
 class Board{
     private:
-        std::array<std::array<char, 3>, 3> board;
+        std::array<std::array<char, 3>, 3> grid;
     public:
         Board();
 
         //board operations
         void display() const;
-        bool make_move(int row,int col,char symbol);
-        bool check_winner(char symbol) const;
-        bool is_full() const;
+        bool makeMove(int row,int col,char symbol);
+        bool checkWinner(char symbol) const;
+        bool isFull() const;
         void reset();
 };

@@ -4,7 +4,7 @@
 
 #include "safeInput.hpp"
 
-int safe_input_int(int& input, const std::string& prompt, int min, int max)
+int safeInputInt(int& input, const std::string& prompt, int min, int max)
 {
 
     std::cout << prompt;

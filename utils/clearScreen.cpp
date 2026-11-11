@@ -4,13 +4,13 @@
 
 #include <cstdlib>
 
-void clear_screen() {
+void clearScreen() {
     std::system("cls");
 }
 
 #else
 
-void clear_screen() {
+void clearScreen() {
     std::cout << "\033[2J\033[H";
     std::cout.flush();
 }

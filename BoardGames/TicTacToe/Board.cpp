@@ -10,7 +10,7 @@ Board::Board(){
 void Board::display() const{
     std::cout<<"---------------\n";
 
-    for(const auto& row:board){
+    for(const auto& row:grid){
         for(const auto& cell:row){
             if(cell=='O'){
                 std::cout<< "|\033[33m O \033[0m|";
@@ -28,38 +28,38 @@ void Board::display() const{
 }
 
 //return false if invalid position or position already occupied, otherwise places the symbol and return true;
-bool Board::make_move(int row, int col, char symbol){
+bool Board::makeMove(int row, int col, char symbol){
     if(row<0 || row>2 || col<0 || col>2){       //invalid position
         return false;
     }
 
-    if(board[row][col]=='X' || board[row][col]=='O'){            //position already occupied
+    if(grid[row][col]=='X' || grid[row][col]=='O'){            //position already occupied
         return false;
     }
 
-    board[row][col]=symbol;
+    grid[row][col]=symbol;
 
     return true;
 }
 
-bool Board::check_winner(char symbol) const{
+bool Board::checkWinner(char symbol) const{
 
     //row wise checking
     for(int i=0;i<3;i++){
-        if(board[i][0]==symbol && board[i][1]==symbol && board[i][2]==symbol){
+        if(grid[i][0]==symbol && grid[i][1]==symbol && grid[i][2]==symbol){
             return true;
         }
     }
 
     //column wise checking
     for(int i=0;i<3;i++){
-        if(board[0][i]==symbol && board[1][i]==symbol && board[2][i]==symbol){
+        if(grid[0][i]==symbol && grid[1][i]==symbol && grid[2][i]==symbol){
             return true;
         }
     }
 
     //diagonal wise checking
-    if((board[0][0]==symbol && board[1][1]==symbol && board[2][2]==symbol) || (board[0][2]==symbol && board[1][1]==symbol && board[2][0]==symbol)){
+    if((grid[0][0]==symbol && grid[1][1]==symbol && grid[2][2]==symbol) || (grid[0][2]==symbol && grid[1][1]==symbol && grid[2][0]==symbol)){
         return true;
     }
 
@@ -67,8 +67,8 @@ bool Board::check_winner(char symbol) const{
 }
 
 
-bool Board::is_full() const{
-    for(const auto& row:board){
+bool Board::isFull() const{
+    for(const auto& row:grid){
         for(const auto& cell:row){
             if(cell!='X' && cell!='O'){
                 return false;
@@ -82,7 +82,7 @@ bool Board::is_full() const{
 void Board::reset(){
     char pos='1';
 
-    for(auto& row:board){
+    for(auto& row:grid){
         for(auto& cell:row){
             cell=pos++;
         }

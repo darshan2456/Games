@@ -3,7 +3,7 @@
 
 #include "safeInput.hpp"
 
-int safe_input_string(std::string& input, const std::string& prompt, std::size_t max_length)
+int safeInputString(std::string& input, const std::string& prompt, std::size_t max_length)
 {
 
     std::cout << prompt;
