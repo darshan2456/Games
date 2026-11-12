@@ -4,6 +4,8 @@
 #include "BoardGames/ConnectFour/ConnectFour.hpp"
 #include "safeInput.hpp"
 
+using namespace ConnectFourGame;
+
 int main() {
 
     while (1) {
@@ -39,9 +41,11 @@ int main() {
                 break;
             }
 
-            case 2:
-                launcher();
+            case 2: {
+                ConnectFourGame::ConnectFour game;
+                game.startGame();
                 break;
+            }
 
             default:
                 std::cout<<"\nInvalid choice lol. Try again\n\n";

@@ -1,6 +1,8 @@
 #include "Board.hpp"
 #include <iostream>
 
+namespace ConnectFourGame {
+
 Board::Board(){
     reset();
 }
@@ -16,13 +18,29 @@ void Board::reset(){
 }
 
 
-void Board::display() const{
-    for(const auto& row:grid){
-        for(const auto& cell:row){
-            std::cout << "| " << cell << " |";
+void Board::display() const {
+
+    std::cout << "\n    0   1   2   3   4   5   6\n";
+    std::cout << "  -----------------------------\n";
+
+    for (const auto& row : grid) {
+        std::cout << "  ";
+
+        for (const auto& cell : row) {
+
+            if (cell == 'R') {
+                std::cout << "| \033[31mO\033[0m ";
+            }
+            else if (cell == 'Y') {
+                std::cout << "| \033[33mO\033[0m ";
+            }
+            else {
+                std::cout << "|   ";
+            }
         }
 
-        std::cout<<"_____________________\n";
+        std::cout << "|\n";
+        std::cout << "  -----------------------------\n";
     }
 }
 
@@ -136,4 +154,6 @@ char Board::checkWin() const{
 
 
     return ' ';
+}
+
 }
