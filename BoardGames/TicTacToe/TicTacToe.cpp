@@ -4,6 +4,8 @@
 #include "safeInput.hpp"
 #include "TicTacToe.hpp"
 
+namespace TicTacToeGame {
+
 
 TicTacToe::TicTacToe() : player1("Player1",'X'), player2("Player2",'O'){
     this->gameover=false;
@@ -185,4 +187,6 @@ void TicTacToe::startGame(){
             playMultiplayer();
         }
     }
+}
+
 }

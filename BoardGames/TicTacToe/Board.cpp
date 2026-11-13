@@ -2,6 +2,8 @@
 
 #include "Board.hpp"
 
+namespace TicTacToeGame {
+
 //constructor
 Board::Board(){
     reset();
@@ -87,4 +89,7 @@ void Board::reset(){
             cell=pos++;
         }
     }
+}
+
+
 }

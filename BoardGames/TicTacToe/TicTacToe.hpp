@@ -5,22 +5,26 @@
 #include "Player.hpp"
 #include "Board.hpp"
 
-class TicTacToe{
-    private:
-        Board board;
-        Player player1;
-        Player player2;
+namespace TicTacToeGame {
 
-        //boolean variable to maintain state of the game
-        bool gameover;
+    class TicTacToe{
+        private:
+            Board board;
+            Player player1;
+            Player player2;
 
-        void  displayInstructions() const;
-        bool getPlayerNames();
-        bool playTurn(const Player& curr_player);
-        void playMultiplayer();
-        void playComputer();
+            //boolean variable to maintain state of the game
+            bool gameover;
 
-    public:
-        TicTacToe();
-        void startGame();
-};
+            void  displayInstructions() const;
+            bool getPlayerNames();
+            bool playTurn(const Player& curr_player);
+            void playMultiplayer();
+            void playComputer();
+
+        public:
+            TicTacToe();
+            void startGame();
+    };
+
+}

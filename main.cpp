@@ -5,6 +5,7 @@
 #include "safeInput.hpp"
 
 using namespace ConnectFourGame;
+using namespace TicTacToeGame;
 
 int main() {
 
@@ -36,7 +37,7 @@ int main() {
         switch (game_choice) {
 
             case 1: {
-                TicTacToe game;
+                TicTacToeGame::TicTacToe game;
                 game.startGame();
                 break;
             }

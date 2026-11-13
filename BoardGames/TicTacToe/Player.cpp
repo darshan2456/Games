@@ -2,17 +2,21 @@
 
 #include "Player.hpp"
 
-Player::Player(const std::string& name, char symbol){
-    this->name=name;
-    this->symbol=symbol;
-}
+namespace TicTacToeGame {
 
-//getter functions for name and symbol
+    Player::Player(const std::string& name, char symbol){
+        this->name=name;
+        this->symbol=symbol;
+    }
 
-std::string Player::getName() const{
-    return name;
-}
+    //getter functions for name and symbol
 
-char Player::getSymbol() const{
-    return symbol;
+    std::string Player::getName() const{
+        return name;
+    }
+
+    char Player::getSymbol() const{
+        return symbol;
+    }
+
 }
