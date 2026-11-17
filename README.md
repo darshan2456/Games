@@ -1,13 +1,14 @@
 This is a collection of games of all kinds, which I have played and loved, and I am going to implement the same in C++. 
 
-Tic-tac-toe is completely furnished and ready to play. 
+Tic-tac-toe and Connect Four are completely furnished and ready to play. 
 
-Demo:- 
+TicTacToe:- 
 
-<img width="1280" height="720" alt="Screencast From 2026-11-08 23-57-01" src="https://github.com/user-attachments/assets/2d540e0c-e923-4353-b003-4f4bd503d339" />
+<img width="1280" height="720" alt="TicTacToe" src="https://github.com/user-attachments/assets/ccb15407-8a4c-4f39-b12d-8435f9830e8f" />
 
+ConnectFour:- 
 
-
+<img width="1280" height="720" alt="ConnectFour" src="https://github.com/user-attachments/assets/a1b2adf1-8b0e-4a4e-bc4d-2cba566f4272" />
 
 Project is compiled with a simple Makefile.
 Run `make run` to compile and play the game in one go.
