@@ -2,13 +2,17 @@
 
 **Tic-tac-toe**, **Connect Four** and **Snake** are completely implemented and ready to play. 
 
-TicTacToe:- 
+**Snake**:- 
 
-<img width="1280" height="720" alt="TicTacToe" src="https://github.com/user-attachments/assets/ccb15407-8a4c-4f39-b12d-8435f9830e8f" />
+<img width="880" height="540" alt="Snake" src="https://github.com/user-attachments/assets/84582d0f-743a-4b3a-86a4-0a9f119deb09" />
 
-ConnectFour:- 
+**TicTacToe**:- 
 
-<img width="1280" height="720" alt="ConnectFour" src="https://github.com/user-attachments/assets/a1b2adf1-8b0e-4a4e-bc4d-2cba566f4272" />
+<img width="880" height="540" alt="TicTacToe" src="https://github.com/user-attachments/assets/ccb15407-8a4c-4f39-b12d-8435f9830e8f" />
+
+**ConnectFour**:- 
+
+<img width="880" height="540" alt="ConnectFour" src="https://github.com/user-attachments/assets/a1b2adf1-8b0e-4a4e-bc4d-2cba566f4272" />
 
 ## Build Instructions
 
