@@ -1,6 +1,6 @@
-This is a collection of games of all kinds, which I have played and loved, and I am going to implement the same in C++. 
+## This is a collection of games of all kinds, which I have played and loved, and I am going to implement the same in C++. 
 
-Tic-tac-toe and Connect Four are completely furnished and ready to play. 
+**Tic-tac-toe**, **Connect Four** and **Snake** are completely implemented and ready to play. 
 
 TicTacToe:- 
 
@@ -10,7 +10,16 @@ ConnectFour:-
 
 <img width="1280" height="720" alt="ConnectFour" src="https://github.com/user-attachments/assets/a1b2adf1-8b0e-4a4e-bc4d-2cba566f4272" />
 
-Project is compiled with a simple Makefile.
-Run `make run` to compile and play the game in one go.
+## Build Instructions
+
+Run the bash script `install.sh` from project root to install all dependencies and raylib library itself
+Run the bash script `run.sh` or simply `make run` to run the project effortlessly
+
+Note: You will need to make `install.sh` executable before running it. You can do so by simply doing 
+
+```
+chmod +x install.sh
+./install.sh
+```
 
 More games coming soon......

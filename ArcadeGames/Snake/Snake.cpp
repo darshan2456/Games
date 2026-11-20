@@ -13,12 +13,16 @@ void Snake::move(bool shouldGrow){
     switch (direction) {
         case Direction::UP:
             newhead.y--;
+            break;
         case Direction::DOWN:
             newhead.y++;
+            break;
         case Direction::LEFT:
             newhead.x--;
+            break;
         case Direction::RIGHT:
             newhead.x++;
+            break;
     }
 
     body.push_front(newhead);
